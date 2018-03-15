@@ -1,0 +1,24 @@
+{
+    "name": "emoretti/kronos",
+    "description": "Kronos is a PHP library, which allows to calculate the execution time of a page and code blocks (called CheckPoint), with an accuracy up to 1 μs",
+    "type": "library",
+    "license": "MIT",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Ettore Moretti",
+            "email": "info@ettoremoretti.com"
+        }
+    ],
+    "config": {
+        "platform": {
+            "php": "5.0.0"
+        }
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+          "emoretti\\kronos\\": "src/"
+        }
+    }
+}
