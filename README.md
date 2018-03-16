@@ -8,6 +8,10 @@ Install the latest version with
 $ composer require emoretti/kronos ^dev-master
 ```
 
+## Report Example
+
+![alt text](http://www.ettoremoretti.com/IMG_REPO/kronos.png)
+
 ## Configuration
 
 `no configuration needed`
