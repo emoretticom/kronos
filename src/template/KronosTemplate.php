@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="vendor/emoretti/kronos/src/template/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="src/template/bootstrap.min.css">
 <div class="container">
    <div class="alert alert-info text-center" role="alert">
       <h4 class="alert-heading">Kronos Report for <?= $this->_data['Main']['Name'] ?></h4>

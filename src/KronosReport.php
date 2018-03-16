@@ -20,6 +20,13 @@ class KronosReport
 		$this->dateFormat = $dateFormat;
 	}
 
+	function renderSavedReport(){
+		 $KT = new KronosTemplate(__DIR__ . "/template/KronosTemplate.php");
+		 $KT->set($this->data);
+		 $KT->setKronosTimeUsed($this->data['Main']['KronosTimeUsed']);
+		 echo $KT->render();
+	}
+
 	function renderReport(){
 		 $KT = new KronosTemplate(__DIR__ . "/template/KronosTemplate.php");
 		 $KT->set($this->getRawData());
@@ -37,6 +44,7 @@ class KronosReport
 				"StartDate" => $this->udate($this->dateFormat, $this->data['MainStart']),
 				"EndTime" 	=> $this->data['MainEnd'],
 				"EndDate" 	=> $this->udate($this->dateFormat, $this->data['MainEnd']),
+				"KronosTimeUsed" => $this->data['KronosTimeUsed'],
 				"ServerExecutionTime" => $this->getTimeDiff($this->data['ServerStartTime'],$this->data['MainEnd']),
 				"ExecutionTime" => $this->getTimeDiff($this->data['MainStart'],$this->data['MainEnd']),
 				"ObjectsDeclared" => $this->data['ObjectSnapshots'][$this->name]['Declared_classes'],

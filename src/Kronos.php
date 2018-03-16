@@ -107,23 +107,37 @@ class Kronos
 	    return $classes;    
 	}
 
-	public function getReport($dateFormat = "d/m/Y H:i:s:u"){
-		$report = new KronosReport($this->pageAlias, 
-			[	
-				"KronosTimeUsed" => $this->classTimeUsed,
-				"ServerStartTime" => $this->serverStartTime,
-				"MainStart" => $this->mainStartTime, 
-				"MainEnd"   => $this->mainEndTime, 
-				"ObjectSnapshots" => $this->objectSnapshot, 
-				"CheckPoints" => $this->checkPoints
-			], 
-			$dateFormat
-		);
+	public static function renderReport($name,$data,$dateFormat='d/m/Y H:i:s:u'){
+			$report = new KronosReport($name, json_decode($data,true), $dateFormat);
 
-		echo $report->renderReport();
+			echo $report->renderSavedReport();
 	}
 
-	public function getReportRaw($dateFormat = "d/m/Y H:i:s:u"){
+	public function getReport($dateFormat = "d/m/Y H:i:s:u"){
+			$report = new KronosReport($this->pageAlias, 
+						[	
+							"KronosTimeUsed" => $this->classTimeUsed,
+							"ServerStartTime" => $this->serverStartTime,
+							"MainStart" => $this->mainStartTime, 
+							"MainEnd"   => $this->mainEndTime, 
+							"ObjectSnapshots" => $this->objectSnapshot, 
+							"CheckPoints" => $this->checkPoints
+						], 
+						$dateFormat
+					);
+
+			echo $report->renderReport();
+	}
+
+	public function saveReportData($filepath){	
+		try {
+			file_put_contents($filepath , json_encode($this->getReportRaw(),JSON_PRETTY_PRINT));	
+		} catch (\Exception $e) {
+			exit($e->getMessage());
+		}
+	}
+
+	public function getReportRaw($json= false, $dateFormat = "d/m/Y H:i:s:u"){
 		$report = new KronosReport($this->pageAlias, 
 			[
 				"KronosTimeUsed" => $this->classTimeUsed,
@@ -136,7 +150,8 @@ class Kronos
 			$dateFormat
 		);
 
-		return $report->getRawData();
+
+		return ($json) ? json_encode($report->getRawData(),JSON_PRETTY_PRINT) :$report->getRawData();
 	}
 
 	private function createCheckPoints($pointName, $startTime){
