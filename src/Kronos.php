@@ -1,7 +1,7 @@
 <?php 
 namespace emoretti\kronos;
 
-use emoretti\kronos\KronosRepor;
+use emoretti\kronos\KronosReport;
 
 use \ReflectionClass;
 
